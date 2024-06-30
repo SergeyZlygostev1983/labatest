@@ -11,23 +11,20 @@ function ready() {
     const commonScripts = new Main();
 
     // main page
-    const mainPage = document.querySelector('.page-main');
+    const mainPage = document.querySelector('.home');
     if (isNodeExist(mainPage)) {
         let index = new Index();
     }
 
     // form
-    const forms = [];
-    document.querySelectorAll('form').forEach((form) => {
-        forms.push(new Form(form));
-    });
+    // const forms = [];
+    // document.querySelectorAll('form').forEach((form) => {
+    //     forms.push(new Form(form));
+    // });
 
     // add slider js
-    const serviceSlider = document.querySelector('[data-service-gallery-container]');
-    const clientsSlider = document.querySelector('[data-clients-gallery-container]');
-    const rotationSlider = document.querySelector('[data-rotation-gallery-container]');
-    const blogSwiper = document.querySelector('[data-swiper="numeric"]');
-    if ( isNodeExist(serviceSlider) || isNodeExist(clientsSlider) || isNodeExist(rotationSlider) || isNodeExist(blogSwiper) ) {
+    const reviewsSlider = document.querySelector('[data-reviews-swiper]');
+    if ( isNodeExist(reviewsSlider) ) {
         let slider = new Slider();
     }
 }

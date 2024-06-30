@@ -19,14 +19,21 @@ module.exports = merge(commonConfig, {
             },
             {
                 test: /\.s[ac]ss$/i,
-                use: [MiniCssExtractPlugin.loader, 'css-loader', {
-                    loader: "sass-loader",
-                    options: {
-                        sassOptions: {
-                            importer: globImporter()
+                use: [
+                    {
+                        loader: MiniCssExtractPlugin.loader,
+                    },
+                    {
+                        loader: 'css-loader'
+                    }, {
+                        loader: 'sass-loader',
+                        options: {
+                            sassOptions: {
+                                importer: globImporter()
+                            }
                         }
                     }
-                }],
+                ]
             },
         ],
     },

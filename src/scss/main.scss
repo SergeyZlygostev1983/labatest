@@ -1,7 +1,8 @@
+@import '_fonts';
 @import '_mixins';
 @import '_colors';
 @import '_normalize';
-@import 'components/**/*.scss';
+@import './components/**/*.scss';
 
 *,
 *::before,
@@ -17,12 +18,17 @@ html {
 }
 
 body {
-    font-family: 'Inter', sans-serif;
-    font-size: 16px;
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    font-family: 'Graphik LCG';
+    font-weight: normal;
+    font-style: normal;
+    font-size: 14px;
     font-weight: 400;
-    line-height: 150%;
-    color: #000;
-    background: #fff;
+    color: $clrBlack;
+    background: $clrWhite;
+    -webkit-font-smoothing: antialiased;
 }
 
 ol,
@@ -30,22 +36,14 @@ ul {
     list-style: none;
 }
 
-input {
+input,
+button {
     outline: none;
+    border: none;
 }
 
 a {
-    font-size: 16px;
-    font-weight: 600;
-    line-height:  150%;
     text-decoration: none;
-}
-
-a:link,
-a:active,
-a:visited,
-a:hover {
-    color: #000;
 }
 
 button {
@@ -62,8 +60,11 @@ p {
     display: flex;
     flex-direction: column;
     width: 100%;
-    max-width: 1440px;
-    min-height: 100vh;
+    max-width: 1256px;
     margin: 0 auto;
-    padding: 0 40px;
+    padding: 0 20px;
+}
+
+.home {
+
 }

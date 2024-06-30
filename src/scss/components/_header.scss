@@ -1,0 +1,43 @@
+header {
+    background: transparent;
+}
+
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    height: 80px;
+    z-index: 10;
+}
+
+.logo {
+    display: flex;
+    align-items: center;
+
+    &__text {
+        margin-left: 9px;
+        color: $clrWhite;
+        @include headline5;
+    }
+}
+
+.menu {
+    &__items {
+        display: flex;
+        align-items: center;
+        gap: 0 24px;
+    }
+
+    &__item {
+        a {
+            color: $clrWhite;
+            @include body16;
+        }
+
+        @media (hover: hover) {
+            &:hover {
+                border-bottom: 1px solid $clrWhite;
+            }
+        }
+    }
+}

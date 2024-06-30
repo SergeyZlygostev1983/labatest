@@ -1,3 +1,137 @@
+@mixin for-large-desktop {
+    @media (max-width: 1919px) { @content; }
+}
+
 @mixin for-desktop {
-    @media (max-width: 1920px) { @content; }
+    @media (max-width: 1470px) { @content; }
+}
+
+@mixin for-pad {
+    @media (max-width: 960px) { @content; }
+}
+
+@mixin for-mobile {
+    @media (max-width: 720px) { @content; }
+}
+
+@mixin for-phone {
+    @media (max-width: 510px) { @content; }
+}
+
+@mixin for-small-phone {
+    @media (max-width: 320px) { @content; }
+}
+
+@mixin for-notdesc {
+    @media (max-width: 1000px) { @content; }
+}
+
+@mixin for-lowdesc {
+    @media (max-width: 1650px) { @content; }
+}
+
+@mixin headline1 {
+    font-size: 52px;
+    font-weight: 600;
+    line-height: 64px;
+}
+
+@mixin headline2 {
+    font-size: 40px;
+    font-weight: 600;
+    line-height: 56px;
+}
+
+@mixin headline3 {
+    font-size: 32px;
+    font-weight: 600;
+    line-height: 40px;
+}
+
+@mixin headline4 {
+    font-size: 24px;
+    font-weight: 600;
+    line-height: 32px;
+}
+
+@mixin headline5 {
+    font-size: 20px;
+    font-weight: 600;
+    line-height: 24px;
+}
+
+@mixin headline6 {
+    font-size: 16px;
+    font-weight: 600;
+    line-height: 24px;
+}
+
+@mixin caption12 {
+    font-size: 12px;
+    font-weight: 400;
+    line-height: 24px;
+    letter-spacing: 0.12em;
+    // letter-spacing: 12%;
+}
+
+@mixin body18 {
+    font-size: 18px;
+    font-weight: 400;
+    line-height: 32px;
+}
+
+@mixin body18-bold {
+    font-size: 18px;
+    font-weight: 600;
+    line-height: 32px;
+}
+
+@mixin body16 {
+    font-size: 16px;
+    font-weight: 400;
+    line-height: 28px;
+}
+
+@mixin body16-bold {
+    font-size: 16px;
+    font-weight: 600;
+    line-height: 28px;
+}
+
+@mixin body14 {
+    font-size: 14px;
+    font-weight: 400;
+    line-height: 24px;
+}
+
+@mixin body14-bold {
+    font-size: 14px;
+    font-weight: 600;
+    line-height: 24px;
+}
+
+@mixin body12 {
+    font-size: 12px;
+    font-weight: 400;
+    line-height: 16px;
+}
+
+@mixin body12-bold {
+    font-size: 12px;
+    font-weight: 600;
+    line-height: 16px;
+}
+
+@mixin placeholder {
+    &::-webkit-input-placeholder { @content; }
+    &:-moz-placeholder           { @content; }
+    &::-moz-placeholder          { @content; }
+    &:-ms-input-placeholder      { @content; }
+}
+
+@mixin form_placeholder {
+    &::-webkit-input-placeholder { @content; }
+    &:-moz-placeholder           { @content; }
+    &::-moz-placeholder          { @content; }
+    &:-ms-input-placeholder      { @content; }
 }
