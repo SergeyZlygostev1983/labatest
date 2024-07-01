@@ -52,10 +52,8 @@ export default class Form {
 
 	sendIfValid(e) {
 	    e.preventDefault();
-	    if (!this.checkFields()) return;
-	    if (this.disabled) return;
 
-	    this.disabled = true;
+	    if (!this.checkFields()) return;
 
 	    const formData = new FormData(this.$form);
 
@@ -67,11 +65,9 @@ export default class Form {
 	    .then(json)
 	    .then(data => {
 			this.success(data);
-            this.disabled = false;
 	    })
 	    .catch(() => {
 			this.error();
-			this.disabled = false;
 	    });
 	}
 
@@ -90,13 +86,6 @@ export default class Form {
         if( $field.getAttribute('name') != 'user_name' ) {
 			if ($field.value == '') {
 				valid = false;
-			} else {
-				if (name === 'phone' && $field.value.indexOf('_') >= 0) {
-					valid = false;
-					var custom_error = 'Неверный формат телефона';
-				}
-		        if (name === 'policy' && $field.prop('checked'))
-		          valid = true;
 			}
 			if (valid) {
 				$fieldWrapper.classList.remove('__invalid');
@@ -112,15 +101,17 @@ export default class Form {
 		let valid = true;
 
         this.$form.querySelectorAll('[data-required]').forEach((el) => {
+			const $fieldWrapper = el.closest('[data-input-wrapper]');
+
 			this.checkField(el);
-			if (hasClass(el, '__invalid'))
+			if (hasClass($fieldWrapper, '__invalid')) {
 				valid = false;
+			}
 		});
 
 		if (valid) {
 			this.$submitButton.classList.remove('__disabled');
 		} else {
-			this.$form.querySelectorAll('.__invalid')[0].focus();
 			this.$submitButton.classList.add('__disabled');
 		}
 

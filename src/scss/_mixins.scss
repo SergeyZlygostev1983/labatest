@@ -1,5 +1,5 @@
 @mixin for-large-desktop {
-    @media (max-width: 1919px) { @content; }
+    @media (max-width: 1920px) { @content; }
 }
 
 @mixin for-desktop {
@@ -7,11 +7,11 @@
 }
 
 @mixin for-pad {
-    @media (max-width: 960px) { @content; }
+    @media (max-width: 1024px) { @content; }
 }
 
 @mixin for-mobile {
-    @media (max-width: 720px) { @content; }
+    @media (max-width: 600px) { @content; }
 }
 
 @mixin for-phone {
@@ -20,14 +20,6 @@
 
 @mixin for-small-phone {
     @media (max-width: 320px) { @content; }
-}
-
-@mixin for-notdesc {
-    @media (max-width: 1000px) { @content; }
-}
-
-@mixin for-lowdesc {
-    @media (max-width: 1650px) { @content; }
 }
 
 @mixin headline1 {

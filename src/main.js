@@ -10,9 +10,9 @@ function ready() {
     // common scripts
     const commonScripts = new Main();
 
-    // main page
-    const mainPage = document.querySelector('.home');
-    if (isNodeExist(mainPage)) {
+    // home page
+    const homePage = document.querySelector('.home');
+    if (isNodeExist(homePage)) {
         let index = new Index();
     }
 
@@ -22,7 +22,7 @@ function ready() {
         forms.push(new Form(form));
     });
 
-    // add slider js
+    // slider
     const reviewsSlider = document.querySelector('[data-reviews-swiper]');
     if ( isNodeExist(reviewsSlider) ) {
         let slider = new Slider();

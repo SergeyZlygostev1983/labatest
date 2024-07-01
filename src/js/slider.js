@@ -19,14 +19,14 @@ export default class Slider {
 	init() {
 		// слайдер картинок услуг на главной
 		const reviewsSlider = new Swiper('[data-reviews-swiper]', {
-            speed: 1500,
-	        slidesPerView: 3,
-	        spaceBetween: 32,
+            // speed: 1500,
+	        slidesPerView: 1,
+	        spaceBetween: 20,
 	        loop: true,
-            autoplay: {
-                delay: 5000,
-                pauseOnMouseEnter: true,
-            },
+            // autoplay: {
+            //     delay: 5000,
+            //     pauseOnMouseEnter: true,
+            // },
             navigation: {
                 nextEl: '.reviews__slider__button-next',
                 prevEl: '.reviews__slider__button-prev',
@@ -35,6 +35,16 @@ export default class Slider {
 				el: '.reviews__slider__pagination',
 				type: 'bullets',
 			},
+			breakpoints: {
+				601:{
+					slidesPerView: 2,
+					spaceBetween: 24,
+				},
+	        	1025:{
+					slidesPerView: 3,
+					spaceBetween: 32,
+				},
+	        }
 	    });
 	}
 

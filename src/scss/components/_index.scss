@@ -2,7 +2,6 @@
     margin-top: -80px;
 }
 
-
 .intro {
     position: relative;
     width: 100%;
@@ -12,6 +11,10 @@
     background-repeat: no-repeat;
     background-position: center;
     background-size: cover;
+
+    @include for-pad {
+        margin-bottom: 55px;
+    }
 
     &__wrapper {
         position: absolute;
@@ -23,6 +26,14 @@
         align-items: center;
         width: 100%;
         max-width: 748px;
+
+        @include for-pad {
+            max-width: 500px;
+        }
+
+        @include for-mobile {
+            max-width: 290px;
+        }
     }
 
     &__title {
@@ -30,11 +41,25 @@
         color: $clrWhite;
         text-align: center;
         @include headline1;
+
+        @include for-pad {
+            @include headline3;
+        }
+
+        @include for-mobile {
+            margin-bottom: 11px;
+            @include headline4;
+        }
     }
 
     &__subtitle {
         color: $clrWhite;
+        text-align: center;
         @include body18;
+
+        @include for-pad {
+            @include body16;
+        }
     }
 
     &__btn {
@@ -50,6 +75,14 @@
         cursor: pointer;
         user-select: none;
 
+        @include for-pad {
+            margin-top: 40px;
+        }
+
+        @include for-mobile {
+            margin-top: 25px;
+        }
+
         @media (hover: hover) {
             &:hover {
                 border: 1px solid $clrMidGray;
@@ -62,27 +95,64 @@
 .guide {
     margin-bottom: 80px;
 
+    @include for-pad {
+        margin-bottom: 46px;
+    }
+
     &__title {
         margin-bottom: 61px;
         text-align: center;
         @include headline2;
+
+        @include for-pad {
+            margin-bottom: 42px;
+        }
+
+        @include for-mobile {
+            margin-bottom: 25px;
+            @include headline4;
+        }
     }
 
     &__items {
         display: flex;
         align-items: center;
-        gap: 0 32px;
+        gap: 32px;
+
+        @include for-pad {
+            flex-wrap: wrap;
+        }
     }
 
     &__item {
         width: 100%;
         max-width: 280px;
 
+        @include for-pad {
+            position: relative;
+            max-width: none;
+            width: 47%;
+            padding-left: 72px;
+        }
+
+        @include for-mobile {
+            width: 100%;
+        }
+
         &__img {
+            @include for-pad {
+                position: absolute;
+                top: 0;
+                left: 0;
+                width: 57px;
+                height: 57px;
+            }
+
             width: 72px;
             height: 72px;
             background-repeat: no-repeat;
             background-position: center;
+            background-size: contain;
         }
 
         &__read {
@@ -113,6 +183,10 @@
     &__item__title {
         margin-top: 15px;
         @include headline6;
+
+        @include for-pad {
+            margin-top: 0;
+        }
     }
 
     &__item__desc {
@@ -125,20 +199,46 @@
 .third {
     margin-bottom: 80px;
 
+    @include for-pad {
+        margin-bottom: 50px;
+    }
+
+    @include for-mobile {
+        margin-bottom: 56px;
+    }
+
     &__content {
         display: flex;
         align-items: center;
         gap: 0 32px;
+
+        @include for-mobile {
+            flex-direction: column-reverse;
+        }
     }
 
     &__info {
         flex-grow: 1;
         width: 47%;
+
+        @include for-mobile {
+            width: 100%;
+            text-align: center;
+        }
     }
 
     &__title {
         margin-bottom: 18px;
         @include headline3;
+
+        @include for-pad {
+            margin-bottom: 14px;
+            @include headline5;
+        }
+
+        @include for-mobile {
+            margin-bottom: 0;
+        }
     }
 
     &__desc {
@@ -147,6 +247,10 @@
 
         p:not(:last-child) {
             margin-bottom: 30px;
+
+            @include for-pad {
+                margin-bottom: 28px;
+            }
         }
     }
 
@@ -158,6 +262,15 @@
         background-repeat: no-repeat;
         background-position: center;
         background-size: contain;
+
+        @include for-pad {
+            height: 281px;
+        }
+
+        @include for-mobile {
+            width: 100%;
+            height: 273px;
+        }
     }
 }
 
@@ -166,24 +279,47 @@
     padding: 57px 0 45px 0;
     background-color: $clrExtraLightGray;
 
+    @include for-pad {
+        margin-bottom: 55px;
+        padding: 32px 0 45px 0;
+    }
+
+    @include for-mobile {
+        padding: 27px 0 37px 0;
+    }
+
+    .container {
+        padding: 0 7px;
+    }
+
     &__title {
         margin-bottom: 32px;
         text-align: center;
         @include headline2;
+
+        @include for-mobile {
+            margin-bottom: 26px;
+            @include headline4;
+        }
     }
 
     &__slider {
         overflow: hidden;
+        padding: 0 10px;
 
         &__wrapper {
             position: relative;
             padding: 0 64.5px;
+
+            @include for-pad {
+                padding: 0;
+            }
         }
 
         &__pagination {
             display: flex;
             justify-content: center;
-            gap: 0 17px;
+            gap: 0 9px;
 
             .swiper-pagination-bullet {
                 background-color: $clrMidGray;
@@ -196,7 +332,7 @@
 
         &__button-prev {
             position: absolute;
-            top: 50%;
+            top: 53%;
             left: 0;
             transform: translateY(-50%);
             display: block;
@@ -208,6 +344,10 @@
             background-size: contain;
             cursor: pointer;
             user-select: none;
+
+            @include for-pad {
+                display: none;
+            }
 
             &.swiper-button-disabled {
                 background-image: url("/src/assets/images/slider-left-notactive.png");
@@ -223,7 +363,7 @@
 
         &__button-next {
             position: absolute;
-            top: 50%;
+            top: 53%;
             right: 0;
             transform: translateY(-50%);
             display: block;
@@ -235,6 +375,10 @@
             background-size: contain;
             cursor: pointer;
             user-select: none;
+
+            @include for-pad {
+                display: none;
+            }
 
             &.swiper-button-disabled {
                 background-image: url("/src/assets/images/slider-right-notactive.png");
@@ -257,9 +401,10 @@
     }
 
     &__item {
-        padding: 22px;
+        padding: 22px 22px 38px 22px;
         border-radius: 8px;
         background-color: $clrWhite;
+        box-shadow: 0px 5px 10px 0px #0000001A;
 
         &.swiper-slide {
             height: auto;
@@ -333,10 +478,22 @@
     margin: 0 auto;
     margin-bottom: 55px;
 
+    @include for-pad {
+        margin-bottom: 30px;
+    }
+
+    @include for-mobile {
+        margin-bottom: 54px;
+    }
+
     &__title {
         margin-bottom: 41px;
         text-align: center;
         @include headline2;
+
+        @include for-mobile {
+            @include headline4;
+        }
     }
 
     &__items {
@@ -347,6 +504,10 @@
         padding: 24px 0;
         border-top: 1px solid $clrLightGray;
         cursor: pointer;
+
+        @include for-mobile {
+            padding: 17px 0;
+        }
 
         @media (hover: hover) {
             &:hover {
@@ -397,6 +558,11 @@
             background-repeat: no-repeat;
             background-position: center;
             background-size: cover;
+
+            @include for-mobile {
+                top: 5px;
+                transform: none;
+            }
         }
     }
 
@@ -406,6 +572,10 @@
         padding-right: 70px;
         @include body18;
         color: $clrDarkGray;
+
+        @include for-mobile {
+            @include body16;
+        }
     }
 }
 
@@ -414,20 +584,47 @@
     padding: 68px 0;
     background-color: $clrExtraLightGray;
 
+    @include for-pad {
+        margin-bottom: 56px;
+        padding: 21px 0 32px 0;
+    }
+
+    @include for-mobile {
+        padding: 21px 0;
+    }
+
     &__items {
         display: flex;
         flex-wrap: wrap;
         gap: 37px 32px;
+
+        @include for-pad {
+            flex-direction: column;
+            flex-wrap: nowrap;
+            gap: 20px 32px;
+        }
     }
 
     &__item {
         width: 47%;
         flex-grow: 1;
+
+        @include for-pad {
+            width: 100%;
+        }
     }
 
     &__item__title {
         margin-bottom: 17px;
         @include body18-bold;
+
+        @include for-pad {
+            margin-bottom: 46px;
+        }
+
+        @include for-mobile {
+            margin-bottom: 14px;
+        }
     }
 
     &__item__desc {
@@ -437,6 +634,10 @@
 
 .form {
     margin-bottom: 80px;
+
+    @include for-pad {
+        margin-bottom: 56px;
+    }
 
     &__wrapper {
         width: 100%;
@@ -456,6 +657,14 @@
         margin-bottom: 44px;
         text-align: center;
         @include headline2;
+
+        @include for-pad {
+            margin-bottom: 31px;
+        }
+
+        @include for-mobile {
+            @include headline4;
+        }
     }
 
     &__content {
@@ -467,7 +676,11 @@
         display: flex;
         flex-wrap: wrap;
         align-items: center;
-        gap: 32px;
+        gap: 19px 32px;
+
+        @include for-mobile {
+            margin-bottom: 20px;
+        }
     }
 
     &__input__error {
@@ -583,7 +796,7 @@
         display: flex;
         flex-wrap: wrap;
         align-items: start;
-        gap: 0 32px;
+        gap: 20px 32px;
 
         .checkbox_pseudo {
             margin-left: 16px;
@@ -593,8 +806,14 @@
 
     &__policy {
         display: flex;
+        align-items: flex-start;
         width: 47%;
         flex-grow: 1;
+        @include body16;
+
+        label {
+            margin-left: 9px;
+        }
     }
 
     &__btn {

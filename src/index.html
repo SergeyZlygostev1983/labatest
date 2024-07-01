@@ -27,7 +27,7 @@
                     </div>
                     <div class="logo__text">testLab</div>
                 </a>
-                <nav class="menu">
+                <nav class="menu" data-main-menu>
                     <ul class="menu__items">
                       <li class="menu__item"><a href="#guide">Как это работает</a></li>
                       <li class="menu__item"><a href="#third">3-й блок</a></li>
@@ -35,6 +35,7 @@
                       <li class="menu__item"><a href="#callback">Форма</a></li>
                     </ul>
                 </nav>
+                <div class="header__burger" data-menu-burger></div>
             </div>
         </div>
     </header>
@@ -94,8 +95,9 @@
 
         <section class="reviews">
             <div class="container">
-                <h2 class="reviews__title">Отзывы</h2>
                 <div class="reviews__slider__wrapper">
+                    <h2 class="reviews__title">Отзывы</h2>
+
                     <div class="reviews__slider swiper-container" data-reviews-swiper>
                         <div class="reviews__items swiper-wrapper">
                             <div class="reviews__item reviews__item-1 swiper-slide">
@@ -221,9 +223,9 @@
                                 </div>
                             </div>
                             <div class="form__submit">
-                                <div class="form__policy checkbox_item _active" data-action="form_checkbox">
-                                    <input type="checkbox" name="policy" class="personalData" checked>
-                                    <p class="checkbox_pseudo" >Согласен, отказываюсь</p>
+                                <div class="form__policy">
+                                    <input type="checkbox" name="policy" id="policy" checked>
+                                    <label for="policy">Согласен, отказываюсь</label>
                                 </div>
                                 <button class="form__btn __disabled" type="submit">Отправить</button>
                             </div>
