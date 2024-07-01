@@ -1,83 +1,146 @@
-// 'use strict';
+'use strict';
 
-// import {status, json, hide, show} from './utilities';
+import Inputmask from 'inputmask';
+import {json, open, close, hide, show, hasClass} from './utilities';
 
-// export default class Form {
-// 	constructor(form) {
-// 		this.$form = form;
-// 		this.$formWrap = this.$form.closest('[data-form-wrapper]');
-// 		this.$formSuccessWrap = this.$formWrap.nextElementSibling;
-// 		this.$formSuccesTitle = this.$formSuccessWrap.querySelector('[data-form-success-title]');
-// 		this.$formSuccesDesc = this.$formSuccessWrap.querySelector('[data-form-success-desc]');
-// 		this.$formInputs = this.$form.querySelectorAll('.form__body input');
-// 		this.$formTextarea = this.$form.querySelectorAll('.form__body textarea');
-// 		this.to = this.$form.getAttribute('action');
 
-// 		this.bind();
-// 	}
+export default class Form {
+	constructor(form) {
+		this.$form = form;
+		this.$formSuccess = this.$form.nextElementSibling;
+		this.$formInputs = this.$form.querySelectorAll('.form__inputs input');
+        this.$submitButton = this.$form.querySelector('button[type="submit"]');
+		this.to = this.$form.getAttribute('action');
 
-// 	bind() {
-// 		this.$form.addEventListener('submit', (e) => {
-// 			if(this.$form.querySelector('input[name="user_name"]').value != ''){
-// 				e.preventDefault();
-// 				return;
-// 			}
+		this.init();
+	}
 
-// 			if(this.$form.querySelector('input:not([name="verify_code"]).is-invalid')) {
-// 				return;
-// 			}
-// 			if(this.$form.querySelector('textarea[name="subject"].is-invalid')) {
-// 				return;
-// 			}
+	init() {
+        this.$form.querySelectorAll('[data-required]').forEach((el) => {
+            const $elWrapper = el.closest('[data-input-wrapper]');
 
-// 			this.sendIfValid(e);
-// 		});
-// 	}
+			el.addEventListener('focus', () => {
+				$elWrapper.classList.add('__label-move');
+			});
 
-// 	success(data) {
-// 		console.log(data);
+			el.addEventListener('blur', (e) => {
+				this.checkField(e.currentTarget);
+				this.checkValid();
+                if(e.currentTarget.value != '') {
+                    $elWrapper.classList.remove('__label-fix');
+                    $elWrapper.classList.add('__label-move');
+                } else {
+                    $elWrapper.classList.add('__label-fix');
+                    $elWrapper.classList.remove('__label-move');
+                }
+			});
 
-// 		this.$formSuccesTitle.textContent = data.title ? data.title : '';
-// 		this.$formSuccesDesc.textContent = data.body ? data.body : '';
+			el.addEventListener('change', (e) => {
+			    this.checkValid();
+			});
+		});
 
-// 		hide(this.$formWrap);
-// 		show(this.$formSuccessWrap);
+		this.$form.addEventListener('submit', (e) => {
+			if(this.$form.querySelector('input[name="user_name"]').value != ''){
+				e.preventDefault();
+				return;
+			}
 
-// 		this.reset();
-// 	}
+			this.sendIfValid(e);
+		});
+	}
 
-// 	reset() {
-// 		this.$formInputs.forEach((input) => {
-// 			input.value = '';
-// 		});
-// 		this.$formTextarea.forEach((textarea) => {
-// 			textarea.value = '';
-// 		});
-// 	}
+	sendIfValid(e) {
+	    e.preventDefault();
+	    if (!this.checkFields()) return;
+	    if (this.disabled) return;
 
-// 	error() {}
+	    this.disabled = true;
 
-// 	sendIfValid(e) {
-// 	    e.preventDefault();
+	    const formData = new FormData(this.$form);
 
-// 	    var formData = new FormData(this.$form);
-// 		formData.append($('[name="csrf-param"]').attr('content'), $('[name="csrf-token"]').attr('content'));
-// 		var formUrl = window.location.href;
-// 	    formData.append('url', formUrl);
+	    fetch(this.to,{
+			method: 'POST',
+			body: formData,
+	    })
+	    .then(status)
+	    .then(json)
+	    .then(data => {
+			this.success(data);
+            this.disabled = false;
+	    })
+	    .catch(() => {
+			this.error();
+			this.disabled = false;
+	    });
+	}
 
-// 	    fetch(this.to,{
-// 			method: 'POST',
-// 			body: formData,
-// 	    })
-// 	    .then(status)
-// 	    .then(json)
-// 	    .then(data => {
-// 			this.success(data);
-// 	    })
-// 	    .catch(() => {
-// 			this.error();
-// 	    });
+    checkValid() {
+		this.$submitButton.classList.remove('__disabled');
+		if (this.$form.querySelectorAll('.__invalid').length > 0) {
+			this.$submitButton.classList.add('__disabled');
+		}
+	}
 
-// 		this.$form.dataset.formType != '' ? ym(96343654,'reachGoal', this.$form.dataset.formType) : '';
-// 	}
-// }
+	checkField($field) {
+		let valid = true;
+		const name = $field.getAttribute('name');
+        const $fieldWrapper = $field.closest('[data-input-wrapper]');
+
+        if( $field.getAttribute('name') != 'user_name' ) {
+			if ($field.value == '') {
+				valid = false;
+			} else {
+				if (name === 'phone' && $field.value.indexOf('_') >= 0) {
+					valid = false;
+					var custom_error = 'Неверный формат телефона';
+				}
+		        if (name === 'policy' && $field.prop('checked'))
+		          valid = true;
+			}
+			if (valid) {
+				$fieldWrapper.classList.remove('__invalid');
+				$fieldWrapper.classList.add('__valid');
+			} else {
+				$fieldWrapper.classList.remove('__valid');
+				$fieldWrapper.classList.add('__invalid');
+			}
+		}
+	}
+
+	checkFields() {
+		let valid = true;
+
+        this.$form.querySelectorAll('[data-required]').forEach((el) => {
+			this.checkField(el);
+			if (hasClass(el, '__invalid'))
+				valid = false;
+		});
+
+		if (valid) {
+			this.$submitButton.classList.remove('__disabled');
+		} else {
+			this.$form.querySelectorAll('.__invalid')[0].focus();
+			this.$submitButton.classList.add('__disabled');
+		}
+
+		return valid;
+	}
+
+	success(data) {
+		console.log(data);
+
+		hide(this.$form);
+		show(this.$formSuccess);
+
+		this.reset();
+	}
+
+	reset() {
+		this.$formInputs.forEach((input) => {
+			input.value = '';
+		});
+	}
+
+	error() {}
+}

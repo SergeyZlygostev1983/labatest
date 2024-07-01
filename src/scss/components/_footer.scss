@@ -8,4 +8,6 @@ footer {
     justify-content: center;
     align-items: center;
     height: 88px;
+    @include body18;
+    color: $clrBlack;
 }

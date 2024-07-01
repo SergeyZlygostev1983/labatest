@@ -17,10 +17,10 @@ function ready() {
     }
 
     // form
-    // const forms = [];
-    // document.querySelectorAll('form').forEach((form) => {
-    //     forms.push(new Form(form));
-    // });
+    const forms = [];
+    document.querySelectorAll('form').forEach((form) => {
+        forms.push(new Form(form));
+    });
 
     // add slider js
     const reviewsSlider = document.querySelector('[data-reviews-swiper]');
